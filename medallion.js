@@ -91,7 +91,7 @@ Jam.Medallion.prototype.createTextElement = function() {
 
   var linkElement = this.createLinkElement();
   linkElement.innerHTML += '&ldquo;' + Jam.escapeHTML(this.json.jam.title) + '&rdquo;';
-  linkElement.innerHTML += ' by ' + this.json.jam.artist;
+  linkElement.innerHTML += Jam.escapeHTML(' by ' + this.json.jam.artist);
   textElement.appendChild(linkElement);
 
   textElement.innerHTML += Jam.escapeHTML('.');
