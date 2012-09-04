@@ -77,6 +77,7 @@ Jam.Medallion.prototype.render = function() {
       this.element.appendChild(this.createTextElement());
     }
   } else {
+    this.element.className += 'jam-inactive';
     this.element.appendChild(this.createNoJamTextElement());
   }
 };
