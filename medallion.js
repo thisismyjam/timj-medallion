@@ -88,6 +88,7 @@ Jam.Medallion.prototype.createImageElement = function() {
   imageElement.src = this.json.jam.jamvatarSmall;
 
   var linkElement = this.createLinkElement();
+  linkElement.className = 'jam-image';
   linkElement.appendChild(imageElement);
 
   return linkElement;
