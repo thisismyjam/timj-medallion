@@ -29,6 +29,14 @@ Jam.Medallion.prototype.setOptions = function(options) {
   this.username = options.username;
 };
 
+Jam.Medallion.prototype.getOption = function(name, defaultValue) {
+  if (this.options.hasOwnProperty(name)) {
+    return this.options[name];
+  } else {
+    return defaultValue;
+  }
+};
+
 Jam.Medallion.prototype.setJSON = function(json) {
   this.json = json;
 };
@@ -59,8 +67,14 @@ Jam.Medallion.prototype.fetch = function(element) {
 
 Jam.Medallion.prototype.render = function() {
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
-  this.element.appendChild(this.createImageElement());
-  this.element.appendChild(this.createTextElement());
+
+  if (this.getOption('image', true)) {
+    this.element.appendChild(this.createImageElement());
+  }
+
+  if (this.getOption('text', true)) {
+    this.element.appendChild(this.createTextElement());
+  }
 };
 
 Jam.Medallion.prototype.createImageElement = function() {
