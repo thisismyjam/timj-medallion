@@ -1,3 +1,20 @@
+/*
+ * Renders a link to a This Is My Jam user's profile, with an image, text or both.
+ * If the user has no active jam, renders a simple 'follow me' link.
+ *
+ * Usage
+ * -----
+ *
+ *     <script src="http://www.thisismyjam.com/medallion.js"></script>
+ *     <script>Jam.Medallion.insert({username: "..."})</script>
+ *
+ * You can pass several options to Jam.Medallion.insert:
+ *
+ * - text: Set to false to stop showing the 'My current jam is:' tag.
+ * - image: Set to false to stop showing the jam avatar.
+ * - imageSize: "small" (default), "medium" or "large".
+ */
+
 // Setup + utilities
 
 Jam = window.Jam || {};
@@ -33,7 +50,7 @@ Jam.Medallion.insert = function(options) {
   medallion.fetch();
 }
 
-// Instance methods
+// Accessors
 
 Jam.Medallion.prototype.setOptions = function(options) {
   this.options  = options;
@@ -51,6 +68,8 @@ Jam.Medallion.prototype.getOption = function(name, defaultValue) {
 Jam.Medallion.prototype.setJSON = function(json) {
   this.json = json;
 };
+
+// Initialization
 
 Jam.Medallion.prototype.insertElement = function() {
   this.element = document.createElement('div')
@@ -70,6 +89,8 @@ Jam.Medallion.prototype.fetch = function(element) {
     }
   );
 };
+
+// Rendering
 
 Jam.Medallion.prototype.render = function() {
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
