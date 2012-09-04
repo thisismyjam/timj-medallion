@@ -1,6 +1,12 @@
-// Setup
+// Setup + utilities
 
 Jam = window.Jam || {};
+
+Jam.escapeHTML = function(text) {
+  var tmpEl = document.createElement('div');
+  ("innerText" in tmpEl) ? (tmpEl.innerText=text) : (tmpEl.textContent=text);
+  return tmpEl.innerHTML;
+}
 
 // Constructor
 
@@ -23,6 +29,10 @@ Jam.Medallion.prototype.setOptions = function(options) {
   this.username = options.username;
 };
 
+Jam.Medallion.prototype.setJSON = function(json) {
+  this.json = json;
+};
+
 Jam.Medallion.prototype.insertElement = function() {
   this.element = document.createElement('div')
   this.element.className = 'jam-medallion jam-loading';
@@ -34,6 +44,7 @@ Jam.Medallion.prototype.fetch = function(element) {
       medallion    = this;
 
   window[callbackName] = function(json) {
+    medallion.setJSON(json);
     medallion.render(json);
   };
 
@@ -46,8 +57,36 @@ Jam.Medallion.prototype.fetch = function(element) {
   );
 };
 
-Jam.Medallion.prototype.render = function(json) {
+Jam.Medallion.prototype.render = function() {
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
-  this.element.innerHTML = 'jam yo';
+  this.element.appendChild(this.createImageElement());
+  this.element.appendChild(this.createTextElement());
 };
 
+Jam.Medallion.prototype.createImageElement = function() {
+  var imageElement = document.createElement('img');
+  imageElement.className = 'jam-jamvatar';
+  imageElement.src = this.json.jam.jamvatarSmall;
+  return imageElement;
+};
+
+Jam.Medallion.prototype.createTextElement = function() {
+  var textElement = document.createElement('p');
+  textElement.className = 'jam-text';
+  textElement.innerHTML = Jam.escapeHTML('My current jam is ');
+
+  var linkElement = this.createLinkElement();
+  linkElement.innerHTML += '&ldquo;' + Jam.escapeHTML(this.json.jam.title) + '&rdquo;';
+  linkElement.innerHTML += ' by ' + this.json.jam.artist;
+  textElement.appendChild(linkElement);
+
+  textElement.innerHTML += Jam.escapeHTML('.');
+
+  return textElement;
+};
+
+Jam.Medallion.prototype.createLinkElement = function() {
+  var linkElement = document.createElement('a');
+  linkElement.href = 'http://www.thisismyjam.com/'+this.username;
+  return linkElement;
+};
