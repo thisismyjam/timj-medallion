@@ -8,6 +8,17 @@ Jam.escapeHTML = function(text) {
   return tmpEl.innerHTML;
 }
 
+Jam.getJSONP = function (url, callback) {
+  var callbackName = '_'+Math.floor(Math.random()*1000000);
+
+  Jam.callbacks = Jam.callbacks || {};
+  Jam.callbacks[callbackName] = callback;
+
+  var script = document.createElement('script');
+  script.src = url + window.encodeURIComponent('Jam.callbacks.' + callbackName);
+  document.head.appendChild(script);
+}
+
 // Constructor
 
 Jam.Medallion = function(options) {
@@ -48,20 +59,15 @@ Jam.Medallion.prototype.insertElement = function() {
 };
 
 Jam.Medallion.prototype.fetch = function(element) {
-  var callbackName = 'JamMedallionCallback_'+Math.floor(Math.random()*1000000);
-  var medallion    = this;
+  var medallion = this;
 
-  window[callbackName] = function(json) {
-    medallion.setJSON(json);
-    medallion.render(json);
-  };
+  Jam.getJSONP(
+    'http://api.thisismyjam.com/1/' + this.username + '.json?callback=',
 
-  document.write(
-    '<script src="http://api.thisismyjam.com/1/' +
-    this.username +
-    '.json?callback=' +
-    callbackName +
-    '"></script>'
+    function(json) {
+      medallion.setJSON(json);
+      medallion.render();
+    }
   );
 };
 
