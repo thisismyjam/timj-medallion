@@ -86,7 +86,11 @@ Jam.Medallion.prototype.createImageElement = function() {
   var imageElement = document.createElement('img');
   imageElement.className = 'jam-jamvatar';
   imageElement.src = this.json.jam.jamvatarSmall;
-  return imageElement;
+
+  var linkElement = this.createLinkElement();
+  linkElement.appendChild(imageElement);
+
+  return linkElement;
 };
 
 Jam.Medallion.prototype.createTextElement = function() {
