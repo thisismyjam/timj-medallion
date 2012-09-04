@@ -72,9 +72,9 @@ Jam.Medallion.prototype.setJSON = function(json) {
 // Initialization
 
 Jam.Medallion.prototype.insertElement = function() {
-  this.element = document.createElement('div')
-  this.element.className = 'jam-medallion jam-loading';
-  document.body.appendChild(this.element);
+  var id = 'jam-medallion-'+Math.floor(Math.random()*1000000);
+  document.write('<div class="jam-medallion jam-loading" id="'+id+'"></div>');
+  this.element = document.getElementById(id);
 };
 
 Jam.Medallion.prototype.fetch = function(element) {
