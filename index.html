@@ -26,31 +26,36 @@
 </head>
 
 <body>
+  <script>
+    var activeUsername = 'aanand';
+    var inactiveUsername = 'aanandtest';
+  </script>
+
   <h1>Default</h1>
   <script src="medallion.js"></script>
-  <script>Jam.Medallion.insert({username: 'aanand'});</script>
+  <script>Jam.Medallion.insert({username: activeUsername});</script>
 
   <h1>Text only</h1>
   <script src="medallion.js"></script>
-  <script>Jam.Medallion.insert({username: 'aanand', text: true, image: false});</script>
+  <script>Jam.Medallion.insert({username: activeUsername, text: true, image: false});</script>
 
   <h1>Image only</h1>
 
   <h2>Small (default)</h2>
   <script src="medallion.js"></script>
-  <script>Jam.Medallion.insert({username: 'aanand', text: false, image: true});</script>
+  <script>Jam.Medallion.insert({username: activeUsername, text: false, image: true});</script>
 
   <h2>Medium</h2>
   <script src="medallion.js"></script>
-  <script>Jam.Medallion.insert({username: 'aanand', text: false, image: true, imageSize: 'medium'});</script>
+  <script>Jam.Medallion.insert({username: activeUsername, text: false, image: true, imageSize: 'medium'});</script>
 
   <h2>Large</h2>
   <script src="medallion.js"></script>
-  <script>Jam.Medallion.insert({username: 'aanand', text: false, image: true, imageSize: 'large'});</script>
+  <script>Jam.Medallion.insert({username: activeUsername, text: false, image: true, imageSize: 'large'});</script>
 
   <h1>Inactive jam</h1>
   <script src="medallion.js"></script>
-  <script>Jam.Medallion.insert({username: 'aanandtest'});</script>
+  <script>Jam.Medallion.insert({username: inactiveUsername});</script>
 </body>
 
 </html>
