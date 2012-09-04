@@ -5,7 +5,7 @@
  * Usage
  * -----
  *
- *     <script src="http://www.thisismyjam.com/medallion.js"></script>
+ *     <script src="http://www.thisismyjam.com/includes/js/medallion.js"></script>
  *     <script>Jam.Medallion.insert({username: "..."})</script>
  *
  * You can pass several options to Jam.Medallion.insert:
