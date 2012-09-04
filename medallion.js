@@ -16,7 +16,7 @@ Jam.getJSONP = function (url, callback) {
 
   var script = document.createElement('script');
   script.src = url + window.encodeURIComponent('Jam.callbacks.' + callbackName);
-  document.head.appendChild(script);
+  document.body.appendChild(script);
 }
 
 // Constructor
