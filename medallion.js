@@ -48,8 +48,8 @@ Jam.Medallion.prototype.insertElement = function() {
 };
 
 Jam.Medallion.prototype.fetch = function(element) {
-  var callbackName = 'JamMedallionCallback_'+Math.floor(Math.random()*1000000),
-      medallion    = this;
+  var callbackName = 'JamMedallionCallback_'+Math.floor(Math.random()*1000000);
+  var medallion    = this;
 
   window[callbackName] = function(json) {
     medallion.setJSON(json);
