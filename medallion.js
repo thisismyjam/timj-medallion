@@ -110,9 +110,14 @@ Jam.Medallion.prototype.createTextElement = function() {
 };
 
 Jam.Medallion.prototype.createNoJamTextElement = function() {
+  var textElement = document.createElement('p');
+  textElement.className = 'jam-text';
+
   var linkElement = this.createLinkElement();
   linkElement.innerHTML = Jam.escapeHTML('Follow me on This Is My Jam');
-  return linkElement;
+  textElement.appendChild(linkElement);
+
+  return textElement;
 };
 
 Jam.Medallion.prototype.createLinkElement = function() {
