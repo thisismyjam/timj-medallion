@@ -33,7 +33,7 @@ Jam.getJSONP = function (url, callback) {
 
   var script = document.createElement('script');
   script.src = url + window.encodeURIComponent('Jam.callbacks.' + callbackName);
-  document.body.appendChild(script);
+  document.getElementsByTagName('head')[0].appendChild(script);
 }
 
 // Constructor
