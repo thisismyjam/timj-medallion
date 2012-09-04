@@ -83,9 +83,12 @@ Jam.Medallion.prototype.render = function() {
 };
 
 Jam.Medallion.prototype.createImageElement = function() {
+  var imageSize = this.getOption('imageSize', 'small');
+  var imageKey  = 'jamvatar' + imageSize[0].toUpperCase() + imageSize.substring(1);
+
   var imageElement = document.createElement('img');
   imageElement.className = 'jam-jamvatar';
-  imageElement.src = this.json.jam.jamvatarSmall;
+  imageElement.src = this.json.jam[imageKey];
 
   var linkElement = this.createLinkElement();
   linkElement.className = 'jam-image';
