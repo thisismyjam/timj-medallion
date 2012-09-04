@@ -68,12 +68,16 @@ Jam.Medallion.prototype.fetch = function(element) {
 Jam.Medallion.prototype.render = function() {
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
 
-  if (this.getOption('image', true)) {
-    this.element.appendChild(this.createImageElement());
-  }
+  if (this.json.hasOwnProperty('jam')) {
+    if (this.getOption('image', true)) {
+      this.element.appendChild(this.createImageElement());
+    }
 
-  if (this.getOption('text', true)) {
-    this.element.appendChild(this.createTextElement());
+    if (this.getOption('text', true)) {
+      this.element.appendChild(this.createTextElement());
+    }
+  } else {
+    this.element.appendChild(this.createNoJamTextElement());
   }
 };
 
@@ -97,6 +101,12 @@ Jam.Medallion.prototype.createTextElement = function() {
   textElement.innerHTML += Jam.escapeHTML('.');
 
   return textElement;
+};
+
+Jam.Medallion.prototype.createNoJamTextElement = function() {
+  var linkElement = this.createLinkElement();
+  linkElement.innerHTML = Jam.escapeHTML('Follow me on This Is My Jam');
+  return linkElement;
 };
 
 Jam.Medallion.prototype.createLinkElement = function() {
