@@ -18,15 +18,15 @@ Markup
 
 The generated markup will look something like this:
 
-<div class="jam-medallion">
-  <a class="jam-image" href="...">
-    <img class="jam-jamvatar" src="...">
-  </a>
-
-  <p class="jam-text">
-    My current jam is <a href="...">...</a>.
-  </p>
-</div>
+    <div class="jam-medallion">
+      <a class="jam-image" href="...">
+        <img class="jam-jamvatar" src="...">
+      </a>
+    
+      <p class="jam-text">
+        My current jam is <a href="...">...</a>.
+      </p>
+    </div>
 
 A "jam-loading" class is added to the outer div while the jam data is being
 loaded from the API, so that you can style it appropriately.
