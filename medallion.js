@@ -127,7 +127,7 @@ Jam.Medallion.prototype.fetch = function(element) {
 // Rendering
 
 Jam.Medallion.prototype.render = function() {
-  if (!this.element) return;
+  if (!this.element || !this.json) return;
 
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
   this.element.innerHTML = '';
