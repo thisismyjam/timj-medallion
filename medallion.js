@@ -190,8 +190,6 @@ Jam.Medallion.prototype.createTextElement = function() {
   linkElement.innerHTML += Jam.escapeHTML(' by ' + this.json.jam.artist);
   textElement.appendChild(linkElement);
 
-  textElement.innerHTML += Jam.escapeHTML('.');
-
   return textElement;
 };
 
