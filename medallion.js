@@ -172,7 +172,16 @@ Jam.Medallion.prototype.createImageElement = function() {
   var imageElement = document.createElement('img');
   imageElement.className = 'jam-jamvatar';
   imageElement.src = this.json.jam[imageKey].replace("api.thisismyjam","thisismyjam");
-
+  if (imageKey == 'jamvatarSmall') {
+      imageElement.setAttribute('height', '80'); imageElement.setAttribute('width', '80');
+  }
+  else if (imageKey == 'jamvatarMedium') {
+      imageElement.setAttribute('height', '185'); imageElement.setAttribute('width', '185');
+  }
+  else if (imageKey == 'jamvatarLarge') {
+      imageElement.setAttribute('height', '395'); imageElement.setAttribute('width', '395');
+  }
+    
   var linkElement = this.createLinkElement('image');
   linkElement.className = 'jam-image';
   linkElement.appendChild(imageElement);
