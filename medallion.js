@@ -112,6 +112,7 @@ Jam.Medallion.prototype.fetch = function(element) {
 
 Jam.Medallion.prototype.render = function() {
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
+  this.element.innerHTML = '';
 
   if (this.json.hasOwnProperty('jam')) {
     if (this.getOption('image', true)) {
