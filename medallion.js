@@ -207,6 +207,7 @@ Jam.Medallion.prototype.createNoJamTextElement = function() {
 Jam.Medallion.prototype.createLinkElement = function(linkType) {
   var linkElement = document.createElement('a');
   linkElement.href = this.linkURL(linkType);
+  linkElement.target = '_blank';
   return linkElement;
 };
 
