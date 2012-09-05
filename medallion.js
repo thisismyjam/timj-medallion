@@ -83,6 +83,22 @@ Jam.Medallion.prototype.getOption = function(name, defaultValue) {
   }
 };
 
+Jam.Medallion.prototype.hasActiveJam = function() {
+  return this.json && this.json.hasOwnProperty('jam');
+};
+
+Jam.Medallion.prototype.hasImage = function() {
+  return this.getOption('image', true);
+};
+
+Jam.Medallion.prototype.hasText = function() {
+  return this.getOption('text', true);
+};
+
+Jam.Medallion.prototype.imageSize = function() {
+  return this.getOption('imageSize', 'small');
+};
+
 Jam.Medallion.prototype.setJSON = function(json) {
   this.json = json;
 };
@@ -114,12 +130,12 @@ Jam.Medallion.prototype.render = function() {
   this.element.className = this.element.className.replace(/\bjam-loading\b/, '');
   this.element.innerHTML = '';
 
-  if (this.json.hasOwnProperty('jam')) {
-    if (this.getOption('image', true)) {
+  if (this.hasActiveJam()) {
+    if (this.hasImage()) {
       this.element.appendChild(this.createImageElement());
     }
 
-    if (this.getOption('text', true)) {
+    if (this.hasText()) {
       this.element.appendChild(this.createTextElement());
     }
   } else {
@@ -128,15 +144,34 @@ Jam.Medallion.prototype.render = function() {
   }
 };
 
+Jam.Medallion.prototype.typeSlug = function() {
+  var components = [];
+
+  if (this.hasActiveJam()) {
+    if (this.hasText()) {
+      components.push('text');
+    }
+
+    if (this.hasImage()) {
+      components.push('image');
+      components.push(this.imageSize());
+    }
+  } else {
+    components.push('inactive');
+  }
+
+  return components.join('-');
+};
+
 Jam.Medallion.prototype.createImageElement = function() {
-  var imageSize = this.getOption('imageSize', 'small');
+  var imageSize = this.imageSize();
   var imageKey  = 'jamvatar' + imageSize[0].toUpperCase() + imageSize.substring(1);
 
   var imageElement = document.createElement('img');
   imageElement.className = 'jam-jamvatar';
   imageElement.src = this.json.jam[imageKey];
 
-  var linkElement = this.createLinkElement();
+  var linkElement = this.createLinkElement('image');
   linkElement.className = 'jam-image';
   linkElement.appendChild(imageElement);
 
@@ -148,7 +183,7 @@ Jam.Medallion.prototype.createTextElement = function() {
   textElement.className = 'jam-text';
   textElement.innerHTML = Jam.escapeHTML('My current jam is ');
 
-  var linkElement = this.createLinkElement();
+  var linkElement = this.createLinkElement('text');
   linkElement.innerHTML += '&ldquo;' + Jam.escapeHTML(this.json.jam.title) + '&rdquo;';
   linkElement.innerHTML += Jam.escapeHTML(' by ' + this.json.jam.artist);
   textElement.appendChild(linkElement);
@@ -162,15 +197,19 @@ Jam.Medallion.prototype.createNoJamTextElement = function() {
   var textElement = document.createElement('p');
   textElement.className = 'jam-text';
 
-  var linkElement = this.createLinkElement();
+  var linkElement = this.createLinkElement('text');
   linkElement.innerHTML = Jam.escapeHTML('Follow me on This Is My Jam');
   textElement.appendChild(linkElement);
 
   return textElement;
 };
 
-Jam.Medallion.prototype.createLinkElement = function() {
+Jam.Medallion.prototype.createLinkElement = function(linkType) {
   var linkElement = document.createElement('a');
-  linkElement.href = 'http://www.thisismyjam.com/'+this.username;
+  linkElement.href = this.linkURL(linkType);
   return linkElement;
 };
+
+Jam.Medallion.prototype.linkURL = function(linkType) {
+  return 'http://www.thisismyjam.com/'+this.username+'?utm_source=user&utm_medium=medallion&utm_campaign='+this.typeSlug()+'&utm_content='+linkType;
+}
