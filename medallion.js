@@ -192,7 +192,7 @@ Jam.Medallion.prototype.createImageElement = function() {
 Jam.Medallion.prototype.createTextElement = function() {
   var textElement = document.createElement('p');
   textElement.className = 'jam-text';
-  textElement.innerHTML = Jam.escapeHTML('My current jam is ');
+  textElement.innerHTML = Jam.escapeHTML('Bumping in the studio: ');
 
   var linkElement = this.createLinkElement('text');
   linkElement.innerHTML += '&ldquo;' + Jam.escapeHTML(this.json.jam.title) + '&rdquo;';
