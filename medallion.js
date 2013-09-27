@@ -99,6 +99,12 @@ Jam.Medallion.prototype.imageSize = function() {
   return this.getOption('imageSize', 'small');
 };
 
+Jam.Medallion.prototype.textLabel = function() {
+  return this.getOption('textLabel', 'My current jam is: ');
+};
+
+
+
 Jam.Medallion.prototype.setJSON = function(json) {
   this.json = json;
 };
@@ -190,9 +196,10 @@ Jam.Medallion.prototype.createImageElement = function() {
 };
 
 Jam.Medallion.prototype.createTextElement = function() {
+  var textLabel = this.textLabel();
   var textElement = document.createElement('p');
   textElement.className = 'jam-text';
-  textElement.innerHTML = Jam.escapeHTML('Bumping in the studio: ');
+  textElement.innerHTML = Jam.escapeHTML(textLabel+" ");
 
   var linkElement = this.createLinkElement('text');
   linkElement.innerHTML += '&ldquo;' + Jam.escapeHTML(this.json.jam.title) + '&rdquo;';
