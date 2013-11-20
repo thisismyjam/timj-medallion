@@ -4,7 +4,7 @@ If the user has no active jam, renders a simple 'follow me' link.
 Usage
 -----
 
-    <script src="http://www.thisismyjam.com/includes/js/medallion.js"></script>
+    <script src="https://www.thisismyjam.com/includes/js/medallion.js"></script>
     <script>Jam.Medallion.insert({username: "..."})</script>
 
 You can pass several options to Jam.Medallion.insert:
