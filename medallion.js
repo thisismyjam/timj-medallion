@@ -115,7 +115,7 @@ Jam.Medallion.prototype.fetch = function(element) {
   var medallion = this;
 
   Jam.getJSONP(
-    'http://api.thisismyjam.com/1/' + this.username + '.json?callback=',
+    'https://api.thisismyjam.com/1/' + this.username + '.json?callback=',
 
     function(json) {
       medallion.setJSON(json);
